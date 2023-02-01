@@ -1,0 +1,128 @@
+**1. What are the different genres?**
+
+Select prime_genre from applestore
+group by prime_genre;
+
+Games
+Productivity
+Weather
+Shopping
+Reference
+Finance
+Music
+Utilities
+Travel
+Social Networking
+Sports
+Business
+Photo & Video
+Navigation
+Entertainment
+Education
+Lifestyle
+Food & Drink
+News
+Health & Fitness
+Medical
+Book
+
+**2. Which is the genre with the most apps rated?**
+
+select prime_genre, sum(rating_count_tot) as total_ratings
+From apple.a
+group by prime_genre 
+order by total_ratings desc;
+
+The answer is games with 8717381 ratings
+
+
+**3. Which is the genre with most apps?**
+
+SELECT prime_genre, count(id_1) 
+From apple.a
+group by prime_genre
+order by count(id_1) DESC;
+
+Answer : games with 169 apps
+
+**4. Which is the one with least?**
+
+select prime_genre, count(id_1) as total_apps
+From apple.a
+group by prime_genre 
+order by total_apps;
+
+Answer: medical with 1 app
+
+**5. Find the top 10 apps most rated.**
+
+select track_name, rating_count_tot
+from apple.a
+order by rating_count_tot desc limit 10;
+
+Facebook	2974676
+Pandora - Music & Radio	1126879
+Pinterest	1061624
+Bible	985920
+Angry Birds	824451
+Fruit Ninja Classic	698516
+Solitaire	679055
+PAC-MAN	508808
+Calorie Counter & Diet Tracker by MyFitnessPal	507706
+The Weather Channel: Forecast, Radar & Alerts	495626
+
+
+
+**6. Find the top 10 apps best rated by users.**
+
+select track_name, user_rating
+from apple.a
+order by user_rating desc limit 10;
+
+Answer:
+J&J Official 7 Minute Workout	5
+Fragment's Note	5
+Dragon Island Blue	5
+Fieldrunners 2	5
+Sworkit - Custom Workouts for Exercise & Fitness	5
+Pumped: BMX	5
+Headspace	5
+Timeshare+	5
+Infect Them All : Vampires	5
+Daily Audio Bible App	5
+
+**7. Take a look at the data you retrieved in question 5. Give some insights.**
+
+We do not have a clue as to what ratings the users gave.
+
+**8. Take a look at the data you retrieved in question 6. Give some insights.**
+
+We do not have a clue as to how many users rated these apps
+
+**9. Now compare the data from questions 5 and 6. What do you see?**
+
+Not one app is in both lists.
+
+**10. How could you take the top 3 regarding both user ratings and number of votes?**
+
+select track_name, rating_count_tot, user_rating
+from apple.a
+order by rating_count_tot desc, user_rating desc limit 3;
+
+Answer:
+track_name	rating_count_tot	user_rating
+Facebook	2974676	3.5
+Pandora - Music & Radio	1126879	4
+Pinterest	1061624	4.5
+
+**11. Do people care about the price of an app?** Do some queries, comment why are you doing them and the results you retrieve. What is your conclusion?
+
+Select avg(price),user_rating
+From apple.a
+group by user_rating
+order by user_rating desc;
+
+We can only say from that query that people are less forgiving for payed app, but also that a well rated app is typically not free.
+
+
+
